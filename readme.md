@@ -49,12 +49,23 @@ Acquired Data:
 - `brightness_t31`, temperature (in Kelvins) of the hotspot/active fire pixel;
 - `radiative_power`, pixel-integrated fire radiative power in MW (MegaWatts), related to the rate at which fuel is being consumed;
 
-Synthetic Data
+Computed Geospatial Data:
 - `dist_road`, distance to the nearest road, None if it's above 2km
 - `dist_rail`, distance to the nearest railway, None if it's above 2km
-- `pop_density`, averege of nearest population centers weighted by distance using the following equation:
-![InverseSqrCube](./docs/InverseSqrCube.png)
+- `pop_density`, average of nearest population centers weighted by distance using the following equation: $\frac{1}{\sqrt{x}+1}$
 
 | ![LowDensity](./docs/LowDensity.PNG) | ![HighDensity](./docs/HighDensity.PNG) |
 |:--:|:--:|
 | Low Density Area, 3.3 avg units | High Density Area, 1524 avg units |
+
+### Normalization
+The distance normalizations need to be a diminishing return function that converges fast, this equation gives these properties: $\frac{1}{e^x}$
+
+### Equations
+| ![inverse-square-cube](./docs/InverseSqrCube.PNG) |
+|:--:|
+| $\frac{1}{\sqrt{x}+1}$ |
+
+| ![inverse-e-to-x](./docs/InverseEToX.PNG) |
+|:--:|
+| $\frac{1}{e^x}$ |
