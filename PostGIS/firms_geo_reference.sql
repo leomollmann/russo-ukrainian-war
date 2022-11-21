@@ -23,7 +23,6 @@ settlements as (
 	select population, ukraine_settlements.geom as geom, name,
 	ST_Distance(ukraine_settlements.geom::geography, envelope.point::geography) as distance
 	from ukraine_settlements, envelope
-	where population > 0
 	order by distance asc
 	limit 10
 ),

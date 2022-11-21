@@ -42,6 +42,11 @@ Another event to consider is that with war, most services are overloaded or stop
 
 ### Data
 ---
+| ![firms-distribution](./docs/FIRMSByDate.PNG) |
+|:--:|
+| FIRMS distribution of data by date, note that the huge spike is the beginning of the war |
+
+#### FIRMS attributes
 Acquired Data:
 - `point` or (`lon`, `lat`), coordinate of detection;
 - `date`, datetime of detection;
@@ -58,10 +63,41 @@ Computed Geospatial Data:
 |:--:|:--:|
 | Low Density Area, 3.3 avg units | High Density Area, 1524 avg units |
 
+Model Data
+- `intent`, category of the fire, 1 for accidental, 2 for attack
+- `source`, where the classification comes from, 1 for annotated, 2 for predicted
+
+#### FIRMS data categories
+|Type                              |Count  |Class    |
+|---                               |---    |---      |
+|2021-01-01 to 2022-02-23          |10115  |-        |
+|2022-02-24 to 2022-11-07          |126027 |-        |
+|1Km from a forest, before the war |6587   |Accident |
+|Biloberezhia wildfire             |       |Accident |
+|Center for information resilience |       |Attack   |
+|Siege of Matiupol                 |       |Attack   |
+|Sviatohirsk Lavra                 |       |?        |
+
+* 1Km from a forest, before the war
+
+| ![AccidentalFiresBeforeWar](./docs/AccidentalFiresBeforeWar.PNG) |
+|:--:|
+| Geographic distribution |
+
+|Attribute      |Mean    |
+|---            |---     |
+|brightness     |316.512 |
+|brightness_t31 |294.206 |
+|radiative_power|24.506  |
+|dist_road      |333.939 |
+|dist_rail      |453.745 |
+|avg_population |49.794  |
 ### Normalization
+---
 The distance normalizations need to be a diminishing return function that converges fast, this equation gives these properties: $\frac{1}{e^x}$
 
 ### Equations
+---
 | ![inverse-square-cube](./docs/InverseSqrCube.PNG) |
 |:--:|
 | $\frac{1}{\sqrt{x}+1}$ |
