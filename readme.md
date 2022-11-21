@@ -1,4 +1,16 @@
-### Sources
+# Russo-Ukrainian War monitoring with NASA's FIRMS
+by Leonardo Möllmann Schöller
+
+## Why use FIRMS to detect war activity?
+| ![national-park-on-fire-twitter](./docs/FIRMSByDate.PNG) |
+|:--:|
+| Distribution of data points by date, direct correlation |
+
+## Motivation
+---
+There are several motives to this topic, the biggest one is if this model can detect the intent score of the fire it can help start independent war crimes investigations and help identify climate damage concerning the war.
+
+## Sources
 ---
 * Center for information resilience (twitter data on confirmed attacks) - https://github.com/mauforonda/ukraine
 * FIRMS archive data - https://firms.modaps.eosdis.nasa.gov/download/
@@ -7,9 +19,9 @@
 * FIRMS manual - https://modis-fire.umd.edu/files/MODIS_C6_Fire_User_Guide_C.pdf
 * Ukraine regions - https://geodata.lib.utexas.edu/catalog/stanford-gg870xt4706
 * Ukraine cities, Nature reserves, Forests, Rails, Roads - http://download.geofabrik.de/
-* Ukraine forest fires https://ceobs.org/countries/ukraine/
+* Ukraine forest fires - https://ceobs.org/countries/ukraine/
 
-### Model
+## Model
 ---
 FIRMS' detected heat signatures are relatively big events of some tons of materials burning in a period, it is mainly used to track fire paths in wildfires for later be used in prevention and data collection about how our climate is changing through the years. These fires could also be triggered by artillery or sabotage, in other words, intentional fire.
 
@@ -22,11 +34,7 @@ The goal is to differentiate what class the FIRMS detected fire point is, is it 
 
 With this model, we can mass classification data to track independently and in real-time where the fighting is occurring and the intensity of it.
 
-### Motivation
----
-There are several motives to this topic, the biggest one is if this model can detect the intent score of the fire it can help start independent war crimes investigations and help identify climate damage concerning the war.
-
-### Annotation
+## Annotation
 ---
 The annotation is done by cross-relating temporal and geographical data from Twitter and NASA's FIRMS, this is done both manually and by bulk relation with data sources like the Center for Information Resilience using PostGIS queries.
 
@@ -40,13 +48,9 @@ Another event to consider is that with war, most services are overloaded or stop
 |:--:|
 | FIRMS detected fires around 2022/05/10 |
 
-### Data
+## Data
 ---
-| ![firms-distribution](./docs/FIRMSByDate.PNG) |
-|:--:|
-| FIRMS distribution of data by date, note that the huge spike is the beginning of the war |
-
-#### FIRMS attributes
+### FIRMS attributes
 Acquired Data:
 - `point` or (`lon`, `lat`), coordinate of detection;
 - `date`, datetime of detection;
@@ -67,7 +71,7 @@ Model Data
 - `intent`, category of the fire, 1 for accidental, 2 for attack
 - `source`, where the classification comes from, 1 for annotated, 2 for predicted
 
-#### FIRMS data categories
+### FIRMS data categories
 |Type                              |Count  |Class    |
 |---                               |---    |---      |
 |2021-01-01 to 2022-02-23          |10115  |-        |
@@ -76,9 +80,12 @@ Model Data
 |Biloberezhia wildfire             |       |Accident |
 |Center for information resilience |       |Attack   |
 |Siege of Matiupol                 |       |Attack   |
+|Siege of Sievierodonetsk          |       |Attack   |
 |Sviatohirsk Lavra                 |       |?        |
 
 * 1Km from a forest, before the war
+
+Technically, every fire before the war began was an accident, but to encourage the modal to learn more about natural forest fires, this bias was provided.
 
 | ![AccidentalFiresBeforeWar](./docs/AccidentalFiresBeforeWar.PNG) |
 |:--:|
@@ -92,16 +99,7 @@ Model Data
 |dist_road      |333.939 |
 |dist_rail      |453.745 |
 |avg_population |49.794  |
-### Normalization
+## Normalization
 ---
 The distance normalizations need to be a diminishing return function that converges fast, this equation gives these properties: $\frac{1}{e^x}$
 
-### Equations
----
-| ![inverse-square-cube](./docs/InverseSqrCube.PNG) |
-|:--:|
-| $\frac{1}{\sqrt{x}+1}$ |
-
-| ![inverse-e-to-x](./docs/InverseEToX.PNG) |
-|:--:|
-| $\frac{1}{e^x}$ |
