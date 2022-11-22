@@ -83,6 +83,7 @@ Model Data
 |Siege of Matiupol                 |527    |Attack   |4     |2    |
 |Siege of Sievierodonetsk          |724    |Attack   |5     |3    |
 |Sviatohirsk Lavra                 |2      |?        |      |4    |
+|Predicted Data                    |121555 |?        |6     |     |
 
 * ### 1Km from a forest, before the war
 
