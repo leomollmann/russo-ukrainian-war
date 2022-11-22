@@ -69,21 +69,22 @@ Computed Geospatial Data:
 
 Model Data
 - `intent`, category of the fire, 1 for accidental, 2 for attack
-- `source`, where the classification comes from, 1 for annotated, 2 for predicted
+- `source`, where the classification comes from with 0 being predicted
+- `event`, event associated with the annotation, used to intersect data with Twitter
 
 ### FIRMS data categories
-|Type                              |Count  |Class    |
-|---                               |---    |---      |
-|2021-01-01 to 2022-02-23          |10115  |-        |
-|2022-02-24 to 2022-11-07          |126027 |-        |
-|1Km from a forest, before the war |6587   |Accident |
-|Biloberezhia wildfire             |       |Accident |
-|Center for information resilience |       |Attack   |
-|Siege of Matiupol                 |       |Attack   |
-|Siege of Sievierodonetsk          |       |Attack   |
-|Sviatohirsk Lavra                 |       |?        |
+|Type                              |Count  |Class    |Source|Event|
+|---                               |---    |---      |---   |---  |
+|2021-01-01 to 2022-02-23          |10115  |-        |      |     |
+|2022-02-24 to 2022-11-07          |126027 |-        |      |     |
+|1Km from a forest, before the war |6587   |Accident |1     |     |
+|Biloberezhia wildfire             |431    |Accident |2     |1    |
+|Center for information resilience |7269   |Attack   |3     |     |
+|Siege of Matiupol                 |527    |Attack   |4     |2    |
+|Siege of Sievierodonetsk          |724    |Attack   |5     |3    |
+|Sviatohirsk Lavra                 |2      |?        |      |4    |
 
-* 1Km from a forest, before the war
+* ### 1Km from a forest, before the war
 
 Technically, every fire before the war began was an accident, but to encourage the modal to learn more about natural forest fires, this bias was provided.
 
@@ -99,7 +100,69 @@ Technically, every fire before the war began was an accident, but to encourage t
 |dist_road      |333.939 |
 |dist_rail      |453.745 |
 |avg_population |49.794  |
-## Normalization
----
-The distance normalizations need to be a diminishing return function that converges fast, this equation gives these properties: $\frac{1}{e^x}$
 
+* ### Biloberezhia nature reserve wildfires (Russian occupation)
+
+In the dry season during the Russian occupation, this nature reserve burnt down as a result of negligence, no firefighting was provided
+
+| ![Biloberezhia](./docs/Biloberezhia.PNG) |
+|:--:|
+| Geographic distribution |
+
+|Attribute      |Mean    |
+|---            |---     |
+|brightness     |332.971 |
+|brightness_t31 |294.260 |
+|radiative_power|16.170  |
+|dist_road      |199.367 |
+|dist_rail      |-       |
+|avg_population |6.340   |	
+
+* ### Center for information resilience, Twitter correlation with FIRMS
+
+| ![Twitter](./docs/AttacksCorrelatedByTwitter.PNG) |
+|:--:|
+| Geographic distribution |
+
+| ![ControllMap](./docs/CurrentState.PNG) |
+|:--:|
+| Current front lines |
+
+|Attribute      |Mean    |
+|---            |---     |
+|brightness     |325.193 |
+|brightness_t31 |287.931 |
+|radiative_power|7.597   |
+|dist_road      |138.415 |
+|dist_rail      |419.653 |
+|avg_population |226.314 |	
+
+* ### Siege of Mariupol
+
+| ![Twitter](./docs/SiegeOfMariupol.PNG) |
+|:--:|
+| Geographic distribution |
+
+|Attribute      |Mean    |
+|---            |---     |
+|brightness     |321.520 |
+|brightness_t31 |279.804 |
+|radiative_power|4.242   |
+|dist_road      |27.391  |
+|dist_rail      |323.292 |
+|avg_population |839.082 |	
+
+* ### Siege of Sievierodonetsk-Lysychansk
+
+| ![Twitter](./docs/SiegeOfSievierodonetskLysychansk.PNG) |
+|:--:|
+| Geographic distribution |
+
+|Attribute      |Mean    |
+|---            |---     |
+|brightness     |321.302 |
+|brightness_t31 |292.513 |
+|radiative_power|5.396   |
+|dist_road      |78.724  |
+|dist_rail      |443.373 |
+|avg_population |271.664 |
