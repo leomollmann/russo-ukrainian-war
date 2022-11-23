@@ -1,0 +1,1 @@
+update geo_firms set attack = NULL, accident = NULL, source = NULL where source = 6

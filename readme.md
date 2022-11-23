@@ -71,18 +71,20 @@ Model Data
 - `intent`, category of the fire, 1 for accidental, 2 for attack
 - `source`, where the classification comes from with 0 being predicted
 - `event`, event associated with the annotation, used to intersect data with Twitter
+- `accident`, model output of the accident classification
+- `attack`, model output of the attack classification
 
 ### FIRMS data categories
 |Type                              |Count  |Class    |Source|Event|
 |---                               |---    |---      |---   |---  |
-|2021-01-01 to 2022-02-23          |10115  |-        |      |     |
+|2021-01-01 to 2021-12-31          |10115  |-        |      |     |
 |2022-02-24 to 2022-11-07          |126027 |-        |      |     |
 |1Km from a forest, before the war |6587   |Accident |1     |     |
 |Biloberezhia wildfire             |431    |Accident |2     |1    |
 |Center for information resilience |7269   |Attack   |3     |     |
 |Siege of Matiupol                 |527    |Attack   |4     |2    |
 |Siege of Sievierodonetsk          |724    |Attack   |5     |3    |
-|Sviatohirsk Lavra                 |2      |?        |      |4    |
+|Sviatohirsk Lavra                 |2      |Attack   |3 or 6|4    |
 |Predicted Data                    |121555 |?        |6     |     |
 
 * ### 1Km from a forest, before the war
