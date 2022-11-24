@@ -9,7 +9,7 @@ class NeuralNet(nn.Module):
   def __init__(self):
     super(NeuralNet, self).__init__()
 
-    self.f_connected1 = nn.Linear(9, 64)
+    self.f_connected1 = nn.Linear(8, 64)
     self.out = nn.Linear(64, 2)
   
   def forward(self, x):

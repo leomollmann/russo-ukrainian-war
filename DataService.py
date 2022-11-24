@@ -6,7 +6,7 @@ import math
 
 def get_annotated(cursor):
   query = """
-    select ST_X(point) as lat, ST_Y(point) as lon, date, brightness, brightness_t31, radiative_power, dist_road, dist_rail, avg_population, intent 
+    select ST_X(point) as lat, ST_Y(point) as lon, brightness, brightness_t31, radiative_power, dist_road, dist_rail, avg_population, intent 
     from geo_firms where intent is not NULL and source != 6
   """
   cursor.execute(query)
@@ -14,7 +14,7 @@ def get_annotated(cursor):
 
 def get_raw(cursor):
   query = """
-    select id, ST_X(point) as lat, ST_Y(point) as lon, date, brightness, brightness_t31, radiative_power, dist_road, dist_rail, avg_population 
+    select id, ST_X(point) as lat, ST_Y(point) as lon, brightness, brightness_t31, radiative_power, dist_road, dist_rail, avg_population 
     from geo_firms where intent is NULL
   """
   cursor.execute(query)
@@ -43,8 +43,8 @@ max_date = datetime.timestamp(datetime(2022, 12, 31, 0, 0, 0))
 def normalize(df: pd.DataFrame):
   df['lat'] = (df['lat'] - extent[0]) / (extent[1] - extent[0])
   df['lon'] = (df['lon'] - extent[2]) / (extent[3] - extent[2])
-  df['date'] = df['date'].apply(lambda x: datetime.timestamp(datetime.strptime(str(x), "%Y-%m-%d")))
-  df['date'] = (df['date'] - min_date) / (max_date - min_date)
+  #df['date'] = df['date'].apply(lambda x: datetime.timestamp(datetime.strptime(str(x), "%Y-%m-%d")))
+  #df['date'] = (df['date'] - min_date) / (max_date - min_date)
 
   df['brightness'] = (df['brightness'] - min_max[0])/(min_max[1] - min_max[0])
   df['brightness_t31'] = (df['brightness_t31'] - min_max[2])/(min_max[3] - min_max[2])
