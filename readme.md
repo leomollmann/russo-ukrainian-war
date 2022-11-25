@@ -84,12 +84,11 @@ Model Data
 |Center for information resilience |7269   |Attack   |3     |     |
 |Siege of Matiupol                 |527    |Attack   |4     |2    |
 |Siege of Sievierodonetsk          |724    |Attack   |5     |3    |
-|Sviatohirsk Lavra                 |2      |Attack   |3 or 6|4    |
 |Predicted Data                    |121555 |?        |6     |     |
 
 * ### 1Km from a forest, before the war
 
-Technically, every fire before the war began was an accident, but to encourage the modal to learn more about natural forest fires, this bias was provided.
+Technically, every fire before the war began, outside the separatist Donbass region, was an accident, but to encourage the modal to learn more about natural forest fires, this bias was provided.
 
 | ![AccidentalFiresBeforeWar](./docs/AccidentalFiresBeforeWar.PNG) |
 |:--:|
